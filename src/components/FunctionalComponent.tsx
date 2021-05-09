@@ -1,11 +1,15 @@
 import React from 'react';
 
-const FunctionalComponent = () => {
+type MyProps = {
+    theWeather: string
+}
+
+const FunctionalComponent = (props: MyProps) => {
     return(
         <div>
             <h1>Fetch Challenge</h1>
             <p>This is the weather at your current location: </p>
-            {/* <p>{this.state.weather}</p> */}
+            <p>{props.theWeather}</p>
         </div>
     )
 }

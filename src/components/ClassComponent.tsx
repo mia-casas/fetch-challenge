@@ -34,25 +34,24 @@ class MyWeather extends React.Component<{}, Location>{
                 lat: position.coords.latitude
             })
             console.log(this.state.long, this.state.lat)
-        })
+        
+            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.long}&units=imperial&appid=ea1dab5cacbb098d89d6a202fac94298`)
+            .then(res => res.json())
+            .then(data => {this.setState({weather: data.weather[0].description})})
+            .catch(console.log)
+            return console.log(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.long}&units=imperial&appid=ea1dab5cacbb098d89d6a202fac94298`)
 // this is working
+})
     }
-   fetchWeather(){
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.long}&units=imperial&appid=ea1dab5cacbb098d89d6a202fac94298`)
-    .then(res => res.json())
-    .then(data => {this.setState({weather: data.weather[0].description})})
-    .catch(console.log)
-    return console.log(this.state.weather)
-  }
+  
   componentDidMount(){
-      this.fetchWeather()
+      this.myLocation()
+    //   this.fetchWeather()
   }
     render(){
         return(
             <div>
-                <FunctionalComponent />
-                {/* {this.myLocation()} */}
-                <p>{this.state.weather}</p>
+                <FunctionalComponent theWeather={this.state.weather}/>
             </div>
         )
     }
